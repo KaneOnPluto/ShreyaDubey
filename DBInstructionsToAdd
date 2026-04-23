@@ -1,0 +1,19 @@
+Add these controls:
+
+Inputs
+TextBox → txtId
+TextBox → txtName
+ComboBox → cmbCity
+Add items: Rajkot, Mumbai, Delhi
+RadioButton → rbMale, rbFemale
+CheckBox → chkReading, chkDancing, chkPlaying
+ListBox → lstSemester
+Add: SEM-1 to SEM-6
+Buttons
+btnInsert
+btnSelect
+btnSearch
+btnUpdate
+btnDelete
+Output
+DataGridView → dataGridView1
