@@ -4,3 +4,7 @@ private void Form1_Load(object sender, EventArgs e)
     cmbCity.Items.Add("Delhi");
     cmbCity.Items.Add("Rajkot");
 }
+
+// Read Value
+
+string city = cmbCity.Text;
