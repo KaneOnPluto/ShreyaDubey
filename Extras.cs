@@ -1,3 +1,146 @@
+// DB 
+
+string cs = @"Data Source=(LocalDB)\MSSQLLocalDB;
+AttachDbFilename=|DataDirectory|\student.mdf;
+Integrated Security=True";
+
+SqlConnection con;
+SqlCommand cmd;
+SqlDataAdapter da;
+
+public Form1()
+{
+    InitializeComponent();
+    con = new SqlConnection(cs);
+}
+
+private void btnSelect_Click(object sender, EventArgs e)
+{
+    try
+    {
+        con.Open();
+
+        cmd = new SqlCommand("select * from Students", con);
+        da = new SqlDataAdapter(cmd);
+
+        DataTable dt = new DataTable();
+        da.Fill(dt);
+
+        dataGridView1.DataSource = dt;
+    }
+    catch (Exception ex)
+    {
+        MessageBox.Show(ex.Message);
+    }
+    finally
+    {
+        con.Close();
+    }
+
+    private void btnInsert_Click(object sender, EventArgs e)
+{
+    try
+    {
+        con.Open();
+
+        string q = "insert into Students values (@Id,@Name,@City)";
+        cmd = new SqlCommand(q, con);
+
+        cmd.Parameters.AddWithValue("@Id", txtId.Text);
+        cmd.Parameters.AddWithValue("@Name", txtName.Text);
+        cmd.Parameters.AddWithValue("@City", cmbCity.Text);
+
+        cmd.ExecuteNonQuery();
+
+        MessageBox.Show("Inserted");
+    }
+    catch (Exception ex)
+    {
+        MessageBox.Show(ex.Message);
+    }
+    finally
+    {
+        con.Close();
+    }
+    }
+
+    private void btnSearch_Click(object sender, EventArgs e)
+{
+    try
+    {
+        con.Open();
+
+        cmd = new SqlCommand("select * from Students where Id=@Id", con);
+        cmd.Parameters.AddWithValue("@Id", txtId.Text);
+
+        da = new SqlDataAdapter(cmd);
+        DataTable dt = new DataTable();
+        da.Fill(dt);
+
+        dataGridView1.DataSource = dt;
+    }
+    catch (Exception ex)
+    {
+        MessageBox.Show(ex.Message);
+    }
+    finally
+    {
+        con.Close();
+    }
+    }
+
+    private void btnUpdate_Click(object sender, EventArgs e)
+{
+    try
+    {
+        con.Open();
+
+        string q = "update Students set Name=@Name, City=@City where Id=@Id";
+        cmd = new SqlCommand(q, con);
+
+        cmd.Parameters.AddWithValue("@Id", txtId.Text);
+        cmd.Parameters.AddWithValue("@Name", txtName.Text);
+        cmd.Parameters.AddWithValue("@City", cmbCity.Text);
+
+        cmd.ExecuteNonQuery();
+
+        MessageBox.Show("Updated");
+    }
+    catch (Exception ex)
+    {
+        MessageBox.Show(ex.Message);
+    }
+    finally
+    {
+        con.Close();
+    }
+    }
+
+    private void btnDelete_Click(object sender, EventArgs e)
+{
+    try
+    {
+        con.Open();
+
+        cmd = new SqlCommand("delete from Students where Id=@Id", con);
+        cmd.Parameters.AddWithValue("@Id", txtId.Text);
+
+        cmd.ExecuteNonQuery();
+
+        MessageBox.Show("Deleted");
+    }
+    catch (Exception ex)
+    {
+        MessageBox.Show(ex.Message);
+    }
+    finally
+    {
+        con.Close();
+    }
+    }
+    
+}
+
 // Date time picker
 
 string date = dateTimePicker1.Value.ToString("dd-MM-yyyy");
